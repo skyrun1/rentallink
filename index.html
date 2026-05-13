@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Website Link for Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:     #0a1f5c;
+  --blue:     #0056b3;
+  --blue-mid: #1a6fd4;
+  --blue-lt:  #4a9eff;
+  --sky:      #dbeafe;
+  --sky-pale: #eff6ff;
+  --white:    #ffffff;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-600: #475569;
+  --gray-800: #1e293b;
+  --green:    #10b981;
+  --red:      #ef4444;
+  --r: 12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+body { font-family: 'Outfit', sans-serif; background: var(--sky-pale); min-height: 100vh; color: var(--gray-800); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--blue-mid) 100%);
+  position: relative; overflow: hidden;
+  padding: 52px 24px 44px; text-align: center; color: white;
+}
+.hero::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:300px; height:300px; background:rgba(255,255,255,.04); border-radius:50%;
+}
+.hero::after {
+  content:''; position:absolute; bottom:-60px; left:-40px;
+  width:200px; height:200px; background:rgba(255,255,255,.03); border-radius:50%;
+}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
+  border-radius:100px; padding:5px 16px;
+  font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-bottom:18px;
+}
+.hero-badge .dot { width:7px;height:7px;background:#4ade80;border-radius:50%; }
+.hero h1 {
+  font-family:'Cormorant Garamond',serif; font-size:clamp(26px,5vw,44px);
+  font-weight:700; line-height:1.1; position:relative; z-index:1;
+}
+.hero-sub { font-size:13px; opacity:.7; margin-top:10px; position:relative; z-index:1; }
+.prog-wrap {
+  max-width:640px; margin:22px auto 0;
+  display:flex; align-items:center; gap:10px; position:relative; z-index:1;
+}
+.prog-wrap small { font-size:11px; opacity:.6; white-space:nowrap; }
+.prog-track { flex:1; height:3px; background:rgba(255,255,255,.18); border-radius:99px; overflow:hidden; }
+.prog-fill { height:100%; background:linear-gradient(90deg,#60a5fa,#a78bfa); border-radius:99px; width:0%; transition:width .4s; }
+
+/* FORM OUTER */
+.form-outer { max-width:660px; margin:0 auto; padding:28px 16px 80px; }
+
+/* CARDS */
+.card {
+  background:white; border-radius:var(--r); border:1px solid var(--sky);
+  box-shadow:0 2px 12px rgba(0,86,179,.07);
+  margin-bottom:20px; overflow:hidden;
+  animation:rise .45s ease both;
+}
+@keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.card:nth-child(1){animation-delay:.04s}
+.card:nth-child(2){animation-delay:.09s}
+.card:nth-child(3){animation-delay:.14s}
+.card:nth-child(4){animation-delay:.19s}
+.card:nth-child(5){animation-delay:.24s}
+.card:nth-child(6){animation-delay:.29s}
+
+.card-head {
+  display:flex; align-items:center; gap:12px;
+  padding:15px 22px; background:var(--sky-pale); border-bottom:1px solid var(--sky);
+}
+.card-icon {
+  width:33px; height:33px; border-radius:8px; flex-shrink:0;
+  background:linear-gradient(135deg,var(--blue),var(--blue-lt));
+  display:flex; align-items:center; justify-content:center; font-size:15px;
+}
+.card-title { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:700; color:var(--navy); }
+.card-body { padding:22px 22px 26px; }
+
+/* GRID */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.span2 { grid-column:span 2; }
+@media(max-width:560px){
+  .g2 { grid-template-columns:1fr; }
+  .span2 { grid-column:span 1; }
+  .card-body { padding:16px 16px 20px; }
+}
+
+/* FIELDS */
+.field { display:flex; flex-direction:column; gap:5px; }
+.field label {
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:.6px; color:var(--gray-600); line-height:1.4;
+}
+.field label .es { font-weight:400; opacity:.75; }
+.req { color:var(--red); margin-left:2px; }
+
+.field input[type=text],
+.field input[type=email],
+.field input[type=number],
+.field input[type=date],
+.field select {
+  padding:10px 13px; border:1.5px solid var(--gray-300); border-radius:8px;
+  font-family:'Outfit',sans-serif; font-size:14px; color:var(--gray-800);
+  background:white; outline:none; width:100%;
+  transition:border-color .2s, box-shadow .2s;
+}
+.field input:focus, .field select:focus {
+  border-color:var(--blue-lt);
+  box-shadow:0 0 0 3px rgba(74,158,255,.13);
+}
+.field select { cursor:pointer; }
+
+/* RADIO */
+.radio-row { display:flex; gap:20px; flex-wrap:wrap; margin-top:4px; }
+.radio-row label {
+  display:flex; align-items:center; gap:7px;
+  font-size:13px; font-weight:500; color:var(--gray-800);
+  cursor:pointer; text-transform:none; letter-spacing:0;
+}
+.radio-row input[type=radio] { accent-color:var(--blue); width:15px; height:15px; cursor:pointer; }
+
+/* UPLOAD */
+.upload-pair { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media(max-width:520px){ .upload-pair { grid-template-columns:1fr; } }
+.upload-box {
+  border:2px dashed var(--blue-lt); border-radius:10px;
+  padding:24px 12px; text-align:center; cursor:pointer;
+  background:var(--sky-pale); transition:all .2s; position:relative;
+}
+.upload-box:hover { background:var(--sky); border-color:var(--blue); }
+.upload-box.filled { border-style:solid; border-color:var(--green); background:#f0fdf4; }
+.upload-box input { display:none; }
+.u-icon { font-size:28px; margin-bottom:6px; }
+.u-label { font-size:12px; font-weight:600; color:var(--blue); }
+.u-hint  { font-size:10px; color:var(--gray-400); margin-top:2px; }
+.u-name  { font-size:11px; color:var(--green); font-weight:600; margin-top:6px; }
+.upload-preview { display:none; width:100%; max-height:100px; object-fit:cover; border-radius:6px; margin-top:8px; }
+.upload-preview.vis { display:block; }
+
+/* PAYMENT NOTE */
+.pay-note {
+  background:linear-gradient(135deg,#fff7ed,#fef3c7);
+  border:1px solid #fcd34d; border-radius:10px; padding:14px 16px;
+  font-size:13px; color:#92400e; margin-bottom:16px;
+  display:flex; align-items:flex-start; gap:10px;
+}
+
+/* TERMS */
+.terms-box {
+  display:flex; align-items:flex-start; gap:12px;
+  background:var(--sky-pale); border:1px solid var(--sky);
+  border-radius:10px; padding:16px; margin-bottom:24px;
+}
+.terms-box input[type=checkbox] {
+  width:17px; height:17px; accent-color:var(--blue);
+  flex-shrink:0; margin-top:2px; cursor:pointer;
+}
+.terms-box label {
+  font-size:13px; color:var(--gray-600); cursor:pointer;
+  line-height:1.55; text-transform:none; letter-spacing:0;
+}
+.terms-box a { color:var(--blue); text-decoration:underline; }
+
+/* SUBMIT */
+.submit-wrap { text-align:center; }
+.btn-submit {
+  display:inline-flex; align-items:center; gap:10px;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 100%);
+  color:white; border:none; padding:15px 52px; border-radius:50px;
+  font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; cursor:pointer;
+  box-shadow:0 4px 20px rgba(0,86,179,.38); transition:all .3s; letter-spacing:.3px;
+}
+.btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,86,179,.48); }
+.btn-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.secure-note { font-size:11px; color:var(--gray-400); margin-top:10px; }
+
+/* SUCCESS */
+.hero-link-wrap { margin-top:14px; }
+.hero-link {
+  display:inline-block; color:white; text-decoration:underline; opacity:.92;
+  font-size:13px; transition:opacity .2s;
+}
+.hero-link:hover { opacity:1; }
+.success-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(10,31,92,.82); backdrop-filter:blur(5px);
+  z-index:999; align-items:center; justify-content:center;
+}
+.success-overlay.show { display:flex; }
+.success-card {
+  background:white; border-radius:20px; padding:48px 36px;
+  text-align:center; max-width:400px; width:90%;
+  animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes pop { from{opacity:0;transform:scale(.82)} to{opacity:1;transform:scale(1)} }
+.s-icon { font-size:52px; margin-bottom:14px; }
+.success-card h2 { font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--navy); margin-bottom:10px; }
+.success-card p { font-size:13.5px; color:var(--gray-600); line-height:1.6; }
+.success-ref { margin-top:18px; background:var(--sky-pale); border-radius:8px; padding:10px 16px; font-size:13px; color:var(--blue); font-weight:600; }
+
+footer { text-align:center; padding:24px; font-size:11px; color:var(--gray-400); }
+footer strong { color:var(--blue); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> Secure Application Portal</div>
+  <h1>Website Link for Application</h1>
+  <p class="hero-sub">Complete all fields below · Todos los campos son necesarios</p>
+  <p class="hero-link-wrap"><a href="dashboard.html" class="hero-link">View Dashboard of submitted applications</a></p>
+  <div class="prog-wrap">
+    <small>Progress</small>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <small id="progPct">0%</small>
+  </div>
+</div>
+
+<div class="form-outer">
+<form id="appForm" novalidate enctype="multipart/form-data">
+
+  <!-- 1: APPLICANT INFO -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon">👤</div>
+      <div class="card-title">Applicant Information</div>
+    </div>
+    <div class="card-body">
+      <div class="g2">
+
+        <div class="field span2">
+          <label>APPLICANT FULL NAME <span class="es">/ NOMBRE COMPLETO DEL SOLICITANTE</span><span class="req">*</span></label>
+          <input type="text" name="fullName" id="fullName" placeholder="First and Last name" required/>
+        </div>
+
+        <div class="field">
+          <label>TENANT MAIL ADDRESS <span class="es">/ DIRECCIÓN DE CORREO DEL INQUILINO</span><span class="req">*</span></label>
+          <input type="email" name="email" id="email" placeholder="you@email.com" required/>
+        </div>
+
+        <div class="field">
+          <label>APPLICANT PHONE NUMBER <span class="es">/ NÚMERO DE TELÉFONO</span></label>
+          <input type="text" name="phone" id="phone" placeholder="+1 (555) 000-0000"/>
+        </div>
+
+        <div class="field span2">
+          <label>APPLICANT CURRENT HOUSE ADDRESS <span class="es">/ DIRECCIÓN ACTUAL</span></label>
+          <input type="text" name="currentAddress" id="currentAddress" placeholder="Street, City, State, ZIP"/>
+        </div>
+
+        <div class="field">
+          <label>APPLICANT OCCUPATION <span class="es">/ OCUPACIÓN</span></label>
+          <input type="text" name="occupation" id="occupation" placeholder="Your job or profession"/>
+        </div>
+
+        <div class="field">
+          <label>MONTHLY INCOME <span class="es">/ INGRESOS MENSUALES ($)</span></label>
+          <input type="number" name="income" id="income" placeholder="0"/>
+        </div>
+
+        <div class="field span2">
+          <label>OTHER INCOME <span class="es">/ OTROS INGRESOS</span></label>
+          <input type="text" name="otherIncome" id="otherIncome" placeholder="e.g. Freelance, Benefits, Rental income…"/>
+        </div>
+
+        <div class="field">
+          <label>WHAT TYPE OF CAR DO YOU DRIVE <span class="es">/ ¿QUÉ TIPO DE COCHE CONDUCES?</span></label>
+          <input type="text" name="carType" id="carType" placeholder="e.g. Toyota Camry 2019"/>
+        </div>
+
+        <div class="field">
+          <label>OTHER APPLICANT NAME <span class="es">/ OTRO SOLICITANTE</span></label>
+          <input type="text" name="otherApplicant" id="otherApplicant" placeholder="If applicable / Si aplica"/>
+        </div>
+
+        <div class="field">
+          <label>HOW MANY APPLICANTS MOVING IN <span class="es">/ ¿CUÁNTOS SE MUDAN?</span></label>
+          <input type="number" name="numMoving" id="numMoving" min="1" placeholder="1"/>
+        </div>
+
+        <div class="field">
+          <label>MOVE-IN DATE <span class="es">/ FECHA DE MUDANZA</span></label>
+          <input type="date" name="moveDate" id="moveDate"/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 2: RENTAL HISTORY -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Rental History <span style="font-size:12px;font-weight:400;opacity:.6">/ Historial de Alquiler</span></div>
+    </div>
+    <div class="card-body">
+      <div class="g2">
+
+        <div class="field">
+          <label>PREVIOUS LANDLORD <span class="es">/ PROPIETARIO ANTERIOR</span></label>
+          <input type="text" name="prevLandlord" id="prevLandlord" placeholder="Name or company"/>
+        </div>
+
+        <div class="field">
+          <label>TENANCY LENGTH <span class="es">/ DURACIÓN DEL ALQUILER</span></label>
+          <input type="text" name="tenancyLength" id="tenancyLength" placeholder="e.g. 2 years 4 months"/>
+        </div>
+
+        <div class="field span2">
+          <label>HAS APPLICANT EVER BROKEN A LEASE <span class="es">/ ¿HAS ROTO UN CONTRATO?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="brokenLease" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="brokenLease" value="No" checked/> No</label>
+          </div>
+        </div>
+
+        <div class="field span2">
+          <label>LOCKED OUT BY SHERIFF / EVICTED <span class="es">/ ¿DESALOJO POR SHERIFF?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="lockout" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="lockout" value="No" checked/> No</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 3: BACKGROUND -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon">📋</div>
+      <div class="card-title">Background Questions <span style="font-size:12px;font-weight:400;opacity:.6">/ Antecedentes</span></div>
+    </div>
+    <div class="card-body">
+      <div class="g2">
+
+        <div class="field span2">
+          <label>ARE YOU MARRIED <span class="es">/ ¿ESTÁS CASADO/A?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="married" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="married" value="No" checked/> No</label>
+          </div>
+        </div>
+
+        <div class="field span2">
+          <label>HAS APPLICANT EVER BEEN GUILTY OF FELONY <span class="es">/ ¿DELITO GRAVE?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="felony" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="felony" value="No" checked/> No</label>
+          </div>
+        </div>
+
+        <div class="field span2">
+          <label>SUED BEFORE <span class="es">/ ¿TE HAN DEMANDADO ANTES?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="suing" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="suing" value="No" checked/> No</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>DO YOU HAVE ANY PET <span class="es">/ ¿TIENES ALGUNA MASCOTA?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="pets" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="pets" value="No" checked/> No</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>DO YOU SMOKE <span class="es">/ ¿FUMAS?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="smoke" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="smoke" value="No" checked/> No</label>
+          </div>
+        </div>
+
+        <div class="field span2">
+          <label>DO YOU DRINK <span class="es">/ ¿BEBES?</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="alcohol" value="Yes"/> Yes / Sí</label>
+            <label><input type="radio" name="alcohol" value="No" checked/> No</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: APPLICATION FEE -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon">💳</div>
+      <div class="card-title">Application Fee <span style="font-size:12px;font-weight:400;opacity:.6">/ Tarifa de Solicitud</span></div>
+    </div>
+    <div class="card-body">
+      <div class="pay-note">
+        💰&nbsp;<span>A refundable application fee of <strong>$50</strong> is required. Select your preferred payment method. / Se requiere una tarifa no reembolsable de <strong>$50</strong>.</span>
+      </div>
+      <div class="field">
+        <label>APPLICATION FEE PAYMENT METHOD <span class="es">/ MÉTODO DE PAGO ($50)</span></label>
+        <select name="paymentMethod" id="paymentMethod">
+          <option value="">-- Select a method / Selecciona un método --</option>
+          <option value="Cashapp">CashApp</option>
+          <option value="Zelle">Zelle</option>
+          <option value="Apple Pay">Apple Pay</option>
+          <option value="Paypal">PayPal</option>
+          <option value="Chime">Chime</option>
+          <option value="Venmo">Venmo</option>
+          <option value="Card code">Card Code</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: ID UPLOAD -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon">🪪</div>
+      <div class="card-title">ID Card Upload <span style="font-size:12px;font-weight:400;opacity:.6">/ Subir Identificación</span></div>
+    </div>
+    <div class="card-body">
+      <div class="upload-pair">
+        <div class="upload-box" id="frontBox" onclick="document.getElementById('fileUploadFront').click()">
+          <input type="file" id="fileUploadFront" name="fileUploadFront" accept="image/*,.pdf"
+            onchange="handleFile(this,'frontBox','frontPrev','frontName')"/>
+          <div class="u-icon">📄</div>
+          <div class="u-label">ID CARD FRONT <br/><span style="font-weight:400;opacity:.75">/ Parte Frontal</span></div>
+          <div class="u-hint">JPG, PNG or PDF · Max 5MB</div>
+          <img id="frontPrev" class="upload-preview" alt=""/>
+          <div id="frontName" class="u-name"></div>
+        </div>
+        <div class="upload-box" id="backBox" onclick="document.getElementById('fileUploadBack').click()">
+          <input type="file" id="fileUploadBack" name="fileUploadBack" accept="image/*,.pdf"
+            onchange="handleFile(this,'backBox','backPrev','backName')"/>
+          <div class="u-icon">🔄</div>
+          <div class="u-label">ID CARD BACK <br/><span style="font-weight:400;opacity:.75">/ Parte Trasera</span></div>
+          <div class="u-hint">JPG, PNG or PDF · Max 5MB</div>
+          <img id="backPrev" class="upload-preview" alt=""/>
+          <div id="backName" class="u-name"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6: TERMS & SUBMIT -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon">✅</div>
+      <div class="card-title">Agreement & Submit <span style="font-size:12px;font-weight:400;opacity:.6">/ Acuerdo y Envío</span></div>
+    </div>
+    <div class="card-body">
+      <div class="terms-box">
+        <input type="checkbox" name="agree" id="agree" required/>
+        <label for="agree">
+          AGREE TO TERMS — I certify that all information provided is true and complete. I authorize verification of all references. I agree to the <a href="#">terms and conditions</a>.
+          / <em>ACEPTAR TÉRMINOS — Certifico que toda la información es verídica. Autorizo la verificación de todas las referencias.</em>
+        </label>
+      </div>
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+          Submit Application
+        </button>
+        <div class="secure-note">🔒 256-bit encrypted · Your data is safe and private</div>
+      </div>
+    </div>
+  </div>
+
+</form>
+</div>
+
+<footer>&copy; 2025 <strong>Skyrun Tech</strong> · Rental Application Portal · All rights reserved</footer>
+
+<!-- SUCCESS -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="s-icon">🎉</div>
+    <h2>Application Submitted!</h2>
+    <p>Thank you! Your application has been received and is under review. We will contact you within 2–3 business days. / Gracias, nos pondremos en contacto en 2–3 días hábiles.</p>
+    <div class="success-ref" id="successRef">Reference: SKY-000000</div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+<style>@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>
+</body>
+</html>
