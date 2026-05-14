@@ -74,7 +74,7 @@ var fileBackEl  = document.getElementById("fileUploadBack");
 if (fileFrontEl && fileFrontEl.files[0]) formData.append("fileUploadFront", fileFrontEl.files[0]);
 if (fileBackEl  && fileBackEl.files[0])  formData.append("fileUploadBack",  fileBackEl.files[0]);
 
-const response = await fetch("https://djrentals-1.onrender.com/application/submit", {
+const response = await fetch("https://rentallink.onrender.com//application/submit", {
 
   method: "POST",
   body: formData  // NO headers — browser sets them automatically
