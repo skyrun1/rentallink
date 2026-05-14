@@ -4,10 +4,35 @@
 const urlParams = new URLSearchParams(window.location.search);
 const houseParam = urlParams.get("house") || "Not selected";
 
+function handleFile(input, boxId, previewId, nameId) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const box = document.getElementById(boxId);
+    const preview = document.getElementById(previewId);
+    const nameEl = document.getElementById(nameId);
+
+    // Show the file name
+    if (nameEl) nameEl.textContent = "✅ " + file.name;
+
+    // Show image preview (only for actual images, not PDFs)
+    if (file.type.startsWith("image/") && preview) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            preview.src = e.target.result;
+            preview.classList.add("vis");
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Add the green "filled" border to the upload box
+    if (box) box.classList.add("filled");
+}
+
 // =======================
 // 2. FORM SUBMISSION LOGIC
 // =======================
-const form = document.getElementById("rentForm");
+const form = document.getElementById("appForm");
 
 if (form) {
     form.addEventListener("submit", async (e) => {
@@ -74,7 +99,7 @@ var fileBackEl  = document.getElementById("fileUploadBack");
 if (fileFrontEl && fileFrontEl.files[0]) formData.append("fileUploadFront", fileFrontEl.files[0]);
 if (fileBackEl  && fileBackEl.files[0])  formData.append("fileUploadBack",  fileBackEl.files[0]);
 
-const response = await fetch("https://rentallink.onrender.com//application/submit", {
+const response = await fetch("https://rentallink.onrender.com/application/submit", {
 
   method: "POST",
   body: formData  // NO headers — browser sets them automatically
