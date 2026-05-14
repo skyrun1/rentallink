@@ -26,9 +26,10 @@ mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 60000
 })
 .then(() => console.log("✅ MongoDB connected!"))
-  .catch((err) => console.log("❌ MongoDB error:", err.message));
-    console.error(err.stack); 
-    
+.catch((err) => {
+  console.error("❌ MongoDB error:", err);
+  console.error(err.stack);
+});
     res.status(500).json({ success: false, error: err.message });
 
 // Start Server
