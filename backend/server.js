@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI, {
   console.error("❌ MongoDB error:", err);
   console.error(err.stack);
 });
-    res.status(500).json({ success: false, error: err.message });
+  
 
 // Start Server
 const PORT = process.env.PORT || 3000;
